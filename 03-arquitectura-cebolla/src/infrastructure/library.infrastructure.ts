@@ -23,4 +23,9 @@ export class LibraryInfrastructure implements LibraryRepository {
     await new Promise((resolve) => setTimeout(resolve, 500));
     return Promise.resolve(books);
   }
+
+  async getBookById(bookId: number): Promise<IBook | undefined> {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    return Promise.resolve(books.find((book) => book.bookId === bookId));
+  }
 }

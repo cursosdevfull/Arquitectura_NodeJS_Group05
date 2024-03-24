@@ -17,4 +17,9 @@ export class LibraryBusiness {
 
     return booksAvailable.filter((book) => book !== null);
   }
+
+  async getBookById(bookId: number): Promise<Book | undefined> {
+    if (bookId < 1) throw new Error("Invalid bookId");
+    return this.libraryData.getBookById(bookId);
+  }
 }

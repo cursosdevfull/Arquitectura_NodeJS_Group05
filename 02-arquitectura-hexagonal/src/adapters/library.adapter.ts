@@ -1,5 +1,5 @@
-import { IBook } from "../ports/books";
-import { ILibraryRepository } from "../ports/library.repository";
+import { IBook } from '../ports/books';
+import { ILibraryRepository } from '../ports/library.repository';
 
 const books: IBook[] = [
   { bookId: 1, subject: "Angular" },
@@ -22,5 +22,10 @@ export class LibraryAdapter implements ILibraryRepository {
   async queryAllBooks(): Promise<IBook[]> {
     await new Promise((resolve) => setTimeout(resolve, 500));
     return Promise.resolve(books);
+  }
+
+  async getBookById(bookId: number): Promise<IBook | undefined> {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    return Promise.resolve(books.find((book) => book.bookId === bookId));
   }
 }

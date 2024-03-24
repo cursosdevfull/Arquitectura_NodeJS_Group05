@@ -35,4 +35,9 @@ export class LibraryData {
     await new Promise((resolve) => setTimeout(resolve, 500));
     return Promise.resolve(books);
   }
+
+  async getBookById(bookId: number): Promise<Book | undefined> {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    return Promise.resolve(books.find((book) => book.bookId === bookId));
+  }
 }

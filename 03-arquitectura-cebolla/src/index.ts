@@ -14,3 +14,11 @@ const libraryApplication = new LibraryApplication(
 libraryApplication.getBooksAvailable().then((books) => {
   console.log(books);
 });
+
+libraryApplication.getBookById(8).then((book) => {
+  if (book) {
+    console.log(book);
+  } else {
+    console.log("Book not found");
+  }
+});

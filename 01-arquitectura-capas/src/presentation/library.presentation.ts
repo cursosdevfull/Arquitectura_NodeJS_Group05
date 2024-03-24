@@ -6,4 +6,8 @@ export class LibraryPresentation {
   async getAllBooksAvailable() {
     return await this.libraryBusiness.getAllBooksAvailable();
   }
+
+  async getBookById(bookId: number) {
+    return await this.libraryBusiness.getBookById(bookId);
+  }
 }

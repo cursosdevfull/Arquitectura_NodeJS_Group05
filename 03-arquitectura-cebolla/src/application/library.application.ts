@@ -23,4 +23,8 @@ export class LibraryApplication {
 
     return booksAvailable.filter((book) => book !== null) as IBook[];
   }
+
+  async getBookById(bookId: number): Promise<IBook | undefined> {
+    return await this.libraryRepository.getBookById(bookId);
+  }
 }
