@@ -1,0 +1,32 @@
+{
+  "name": "arquitectura_nodejs_group05",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean && tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cursosdevfull/Arquitectura_NodeJS_Group05.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cursosdevfull/Arquitectura_NodeJS_Group05/issues"
+  },
+  "homepage": "https://github.com/cursosdevfull/Arquitectura_NodeJS_Group05#readme",
+  "dependencies": {
+    "inversify": "^6.0.2",
+    "neverthrow": "^6.1.0",
+    "reflect-metadata": "^0.2.2",
+    "rimraf": "^5.0.5",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/uuid": "^9.0.8",
+    "tsconfig-paths": "^4.2.0"
+  }
+}
