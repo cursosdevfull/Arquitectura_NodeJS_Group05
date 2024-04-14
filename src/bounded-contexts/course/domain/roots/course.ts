@@ -1,21 +1,26 @@
-import { Goal, Requeriment, Syllabus } from '@course/entities';
+import { Goal, Requeriment, Syllabus } from "@course/entities";
 
-export interface CourseProps {
+export interface CourseEssentials {
   courseId: string;
   title: string;
+}
+
+export interface CourseOptionals {
   slug: string;
   goals: Goal[];
   requeriments: Requeriment[];
   syllabus: Syllabus[];
 }
 
+export type CourseProps = CourseEssentials & Partial<CourseOptionals>;
+
 export class Course {
   private readonly courseId: string;
   private title: string;
-  private slug: string;
-  private goals: Goal[];
-  private requeriments: Requeriment[];
-  private syllabus: Syllabus[];
+  private slug: string | undefined;
+  private goals: Goal[] | undefined;
+  private requeriments: Requeriment[] | undefined;
+  private syllabus: Syllabus[] | undefined;
 
   constructor(props: CourseProps) {
     Object.assign(this, props);

@@ -1,4 +1,5 @@
 import { Container } from "inversify";
+import { CourseMemory } from "src/bounded-contexts/course/infrastructure/course-memory";
 
 import { CourseSaveApplication } from "../../bounded-contexts/course/application/course-save.application";
 import { CourseInfrastructure } from "../../bounded-contexts/course/infrastructure/course.infrastructure";
@@ -16,5 +17,7 @@ container.bind("ScheduleRepository").to(ScheduleInfrastructure);
 container.bind("CourseSaveApplication").to(CourseSaveApplication);
 container.bind("EnrollmentSaveApplication").to(EnrollmentSaveApplication);
 container.bind("ScheduleSaveApplication").to(ScheduleSaveApplication);
+
+container.bind("CourseMemory").to(CourseMemory);
 
 export { container };

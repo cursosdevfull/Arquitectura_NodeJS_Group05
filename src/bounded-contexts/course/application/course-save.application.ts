@@ -1,6 +1,7 @@
 import { Course, CourseProps } from "@course/roots/course";
 import { CourseFactory } from "@course/roots/course-factory";
 import { inject, injectable } from "inversify";
+import slugify from "slugify";
 
 import { CourseRepository } from "../domain/repositories/course.repository";
 
@@ -10,13 +11,20 @@ export class CourseSaveApplication {
     @inject("CourseRepository") private readonly repository: CourseRepository
   ) {}
 
-  execute(props: CourseProps): Course {
-    const existsSlug = this.repository.findBySlug(props.slug);
+  async execute(props: CourseProps): Promise<Course> {
+    let existsSlug: boolean;
+    let slug: string;
+    let counter = 0;
+    do {
+      slug = slugify(props.title, { lower: true });
+      if (counter > 0) slug = `${slug}-${counter}`;
+      existsSlug = await this.repository.findBySlug(slug);
+      counter++;
+    } while (existsSlug);
 
-    if (!existsSlug) {
-      const course = CourseFactory.create(props);
-      const courseSaved = this.repository.save(course);
-      return courseSaved;
-    }
+    const propsWithSlug = { ...props, slug };
+    const course = CourseFactory.create(propsWithSlug);
+    const courseSaved = await this.repository.save(course);
+    return courseSaved;
   }
 }

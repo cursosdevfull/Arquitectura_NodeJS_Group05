@@ -1,28 +1,23 @@
 import { Course } from "@course/roots/course";
-import { injectable } from "inversify";
+import { inject, injectable } from "inversify";
 
 import { CourseRepository } from "../domain/repositories/course.repository";
+import { CourseMemory, ICourseMemory } from "./course-memory";
+import { CourseDto } from "./dtos/course.dto";
 
 @injectable()
 export class CourseInfrastructure implements CourseRepository {
-  findBySlug(slug: string): boolean {
-    return false;
+  constructor(
+    @inject("CourseMemory") private readonly courseMemory: CourseMemory
+  ) {}
+
+  async findBySlug(slug: string): Promise<boolean> {
+    return await this.courseMemory.findBySlug(slug);
   }
 
-  save(course: Course): Course {
-    this.setCache();
-    return course;
-  }
-
-  invalidateCache(): void {
-    console.log("Cache invalidated");
-  }
-
-  getCache(): void {
-    console.log("Cache returned");
-  }
-
-  setCache(): void {
-    console.log("Cache set");
+  async save(course: Course): Promise<Course> {
+    const courseMemory = CourseDto.fromDomainToData(course) as ICourseMemory;
+    await this.courseMemory.save(courseMemory);
+    return Promise.resolve(course);
   }
 }
