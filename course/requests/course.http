@@ -1,0 +1,10 @@
+### Get all courses
+get http://localhost:3000/course
+
+### Insert course
+post http://localhost:3000/course
+Content-Type: application/json
+
+{
+    "name": "Typescript"
+}
