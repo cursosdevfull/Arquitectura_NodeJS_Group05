@@ -1,14 +1,18 @@
 import { Module } from '@nestjs/common';
 
+import { DatabaseModule } from '../../database/database.module';
 import { CourseApplication } from '../application/course.application';
 import { CourseInfrastructure } from '../infrastructure/course.infrastructure';
+import { courseProviders } from '../infrastructure/entities/course.provider';
 import { CourseController } from './course.controller';
 
 @Module({
+  imports: [DatabaseModule],
   controllers: [CourseController],
   providers: [
     CourseApplication,
     { provide: 'CourseRepository', useClass: CourseInfrastructure },
+    ...courseProviders,
   ],
 })
 export class CourseModule {}

@@ -1,6 +1,7 @@
+import { CourseGetAllResult, CourseSaveResult } from '../../infrastructure/course.infrastructure';
 import { Course } from '../course';
 
 export interface CourseRepository {
-  getAllCourses(): Promise<object[]>;
-  save(course: Course): Promise<void>;
+  getAllCourses(): Promise<CourseGetAllResult>;
+  save(course: Course): Promise<CourseSaveResult>;
 }

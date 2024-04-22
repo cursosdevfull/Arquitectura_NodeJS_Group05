@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+  mysql-server:
+    image: mysql:8
+    container_name: mysql-server
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: course
+      MYSQL_USER: user
+      MYSQL_PASSWORD: 12345
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+    volumes:
+      - vol-arq-mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 3s
+    networks:
+      - net-arq
+
+  mysql-client:
+    image: phpmyadmin
+    container_name: mysql-client
+    environment:
+      PMA_HOST: mysql-server
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 3s
+    depends_on:
+      mysql-server:
+        condition: service_healthy
+    networks:
+      - net-arq
+
+volumes:
+  vol-arq-mysql:
+    driver: local
+    name: vol-arq-mysql
+
+networks:
+  net-arq:
+    driver: bridge
+    name: net-arq

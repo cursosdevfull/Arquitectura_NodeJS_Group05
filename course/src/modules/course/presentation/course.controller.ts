@@ -1,7 +1,9 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, InternalServerErrorException, Post } from '@nestjs/common';
+import { v4 as uuidv4 } from 'uuid';
 
 import { CourseApplication } from '../application/course.application';
-import { Course, CourseProps } from '../domain/course';
+import { CourseProperties } from '../domain/course';
+import { CourseFactory } from '../domain/course-factory';
 import { CourseInsertDto } from './dtos/course-insert.dto';
 
 @Controller('course')
@@ -9,19 +11,35 @@ export class CourseController {
   constructor(private readonly courseApplication: CourseApplication) {}
 
   @Get()
-  getAll() {
-    return this.courseApplication.getAllCourses();
+  async getAll() {
+    const courseGetAllResult = await this.courseApplication.getAllCourses();
+    if (courseGetAllResult.isErr()) {
+      return new InternalServerErrorException(courseGetAllResult.error.message);
+    }
+    return courseGetAllResult.value;
   }
 
   @Post()
-  insert(@Body() inputBody: CourseInsertDto) {
-    const props: CourseProps = {
-      name: inputBody['name'],
+  async insert(@Body() inputBody: CourseInsertDto) {
+    const { title } = inputBody;
+
+    const props: CourseProperties = {
+      courseId: uuidv4(),
+      title,
     };
 
-    const course = new Course(props);
+    const courseResult = CourseFactory.create(props);
+    if (courseResult.isErr()) {
+      return new BadRequestException(courseResult.error.message);
+    }
 
-    this.courseApplication.saveCourse(course);
+    const courseSaveResult = await this.courseApplication.saveCourse(
+      courseResult.value,
+    );
+    if (courseSaveResult.isErr()) {
+      return new InternalServerErrorException(courseSaveResult.error.message);
+    }
+    return { message: 'Course created successfully' };
   }
 }
 

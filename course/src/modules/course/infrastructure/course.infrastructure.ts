@@ -1,32 +1,45 @@
+import { Inject } from '@nestjs/common';
+import { err, ok, Result } from 'neverthrow';
+import { IsNull, Repository } from 'typeorm';
+
+import { DatabaseException } from '../../core/exceptions/database.exception';
 import { Course } from '../domain/course';
 import { CourseRepository } from '../domain/repositories/course.repository';
+import { CourseDto } from './dtos/course.dto';
+import { CourseEntity } from './entities/course.entity';
+
+export type CourseSaveResult = Result<Course, DatabaseException>;
+export type CourseGetAllResult = Result<Course[], DatabaseException>;
 
 export class CourseInfrastructure implements CourseRepository {
-  private data = [
-    { name: 'Course 1' },
-    { name: 'Course 2' },
-    { name: 'Course 3' },
-    { name: 'Course 4' },
-    { name: 'Course 5' },
-    { name: 'Course 6' },
-  ];
+  constructor(
+    @Inject('COURSE_REPOSITORY')
+    private readonly repository: Repository<CourseEntity>,
+  ) {}
 
-  async getAllCourses(): Promise<object[]> {
-    await new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(true);
-      }, 3000);
-    });
-    return Promise.resolve(this.data);
+  async getAllCourses(): Promise<CourseGetAllResult> {
+    try {
+      const courseEntities = await this.repository.find({
+        where: { deletedAt: IsNull() },
+      });
+      return ok(
+        courseEntities.map((course) =>
+          CourseDto.fromDataToDomain(course),
+        ) as Course[],
+      );
+    } catch (error) {
+      return err(new DatabaseException(error.message));
+    }
   }
 
-  async save(course: Course): Promise<void> {
-    await new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(true);
-      }, 2000);
-    });
+  async save(course: Course): Promise<CourseSaveResult> {
+    try {
+      const courseEntity = CourseDto.fromDomainToData(course);
+      await this.repository.save(courseEntity);
 
-    this.data.push({ name: course.properties.name });
+      return ok(course);
+    } catch (error) {
+      return err(new DatabaseException(error.message));
+    }
   }
 }
