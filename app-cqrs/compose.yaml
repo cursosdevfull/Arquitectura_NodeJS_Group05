@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  mysql-server:
+    image: mysql:8
+    container_name: mysql-server
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: test
+      MYSQL_DATABASE: curso
+    networks:
+      - cqrs-network
+
+  mysql-client:
+    image: phpmyadmin
+    container_name: mysql-client
+    environment:
+      PMA_HOST: mysql-server
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    ports:
+      - '8080:80'
+    networks:
+      - cqrs-network
+
+  mongo-server:
+    image: mongo:3.6
+    container_name: mongo-server
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: test
+    networks:
+      - cqrs-network
+
+  mongo-client:
+    image: mongo-express
+    container_name: mongo-client
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: user
+      ME_CONFIG_MONGODB_ADMINPASSWORD: test
+      ME_CONFIG_MONGODB_URL: mongodb://user:test@mongo-server:27017/
+      ME_CONFIG_BASICAUTH: false
+    networks:
+      - cqrs-network
+
+networks:
+  cqrs-network:
+    name: cqrs-network
+    driver: bridge
