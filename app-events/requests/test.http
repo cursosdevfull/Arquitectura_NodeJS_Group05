@@ -1,0 +1,12 @@
+### Trigger for creating user
+get http://localhost:3000
+
+### Manual event
+get http://localhost:3000/event
+
+### Manual event update
+get http://localhost:3000/update
+
+
+### Manual event update2
+get http://localhost:3000/update2
