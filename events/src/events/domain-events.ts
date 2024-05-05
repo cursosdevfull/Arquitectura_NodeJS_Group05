@@ -24,10 +24,12 @@ export class DomainEvents {
 
   static register(cb: (evt: IDomainEvent) => void, eventClassName: string) {
     if (!this.handlerMap.hasOwnProperty(eventClassName)) {
-      this.handlerMap[eventClassName] = [];
+      this.handlerMap[eventClassName] = []; // { "UserCreated": [] }
     }
 
     this.handlerMap[eventClassName].push(cb);
+    // { "UserCreated": [ showMessage] }
+    // { "UserCreated": [ showMessage, startEnroll] }
   }
 
   static dispatchEventsForAggregate(id: string) {
@@ -44,7 +46,7 @@ export class DomainEvents {
   }
 
   static dispatch(evt: IDomainEvent) {
-    const eventClassName = evt.constructor.name;
+    const eventClassName = evt.constructor.name; // "UserCreated"
     if (this.handlerMap.hasOwnProperty(eventClassName)) {
       const handlers = this.handlerMap[eventClassName];
       for (const handler of handlers) {
