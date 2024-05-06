@@ -2,6 +2,8 @@ import { DataSource } from 'typeorm';
 
 import { AppService } from '../../app.service';
 import { CourseEntity } from '../course/infrastructure/entities/course.entity';
+import { RoleEntity } from '../role/infrastructure/entities/role.entity';
+import { UserEntity } from '../user/infrastructure/entities/user.entity';
 
 export const databaseProviders = [
   {
@@ -14,7 +16,7 @@ export const databaseProviders = [
         username: AppService.DATABASE_USERNAME,
         password: AppService.DATABASE_PASSWORD,
         database: AppService.DATABASE_NAME,
-        entities: [CourseEntity],
+        entities: [CourseEntity, UserEntity, RoleEntity],
         synchronize: AppService.DATABASE_SYNCHRONIZE,
         logging: AppService.DATABASE_LOGGING,
       });

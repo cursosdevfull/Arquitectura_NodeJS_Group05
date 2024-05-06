@@ -1,6 +1,17 @@
-import { BadRequestException, Body, Controller, Get, InternalServerErrorException, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  InternalServerErrorException,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
+import { AuthenticationGuard } from 'src/modules/core/guards/authentication.guard';
 import { v4 as uuidv4 } from 'uuid';
 
+import { Roles } from '../../core/decorators/roles';
+import { AuthorizationGuard } from '../../core/guards/authorization.guard';
 import { CourseApplication } from '../application/course.application';
 import { CourseProperties } from '../domain/course';
 import { CourseFactory } from '../domain/course-factory';
@@ -11,6 +22,8 @@ export class CourseController {
   constructor(private readonly courseApplication: CourseApplication) {}
 
   @Get()
+  @Roles('ADMIN2', 'OPERATOR2')
+  @UseGuards(AuthenticationGuard, AuthorizationGuard)
   async getAll() {
     const courseGetAllResult = await this.courseApplication.getAllCourses();
     if (courseGetAllResult.isErr()) {

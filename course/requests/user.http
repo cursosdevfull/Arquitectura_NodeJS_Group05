@@ -1,0 +1,10 @@
+post http://localhost:3000/user
+Content-Type: application/json
+
+{
+    "name": "Juan",
+    "lastname" : "Perez",
+    "email": "juan.perez@email.com",
+    "password": "123456",
+    "roles": [{"id": "3fbc819f-98d6-4e2d-a6e6-bca4d4f78311"}, {"id": "469cda1e-93af-454e-bca7-9dbc248f0da1"}]
+}

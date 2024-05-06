@@ -8,3 +8,7 @@ Content-Type: application/json
 {
     "title": "Angular"
 }
+
+### Get all courses
+get http://localhost:3000/course
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSnVhbiIsImxhc3RuYW1lIjoiUGVyZXoiLCJpZCI6IjAwYjYxOWQyLWI4MDctNGI1Ni1hNGYxLTQ1ZTM1YzE1Zjg5NyIsInJvbGVzIjpbeyJpZCI6IjNmYmM4MTlmLTk4ZDYtNGUyZC1hNmU2LWJjYTRkNGY3ODMxMSIsIm5hbWUiOiJPUEVSQVRPUiJ9LHsiaWQiOiI0NjljZGExZS05M2FmLTQ1NGUtYmNhNy05ZGJjMjQ4ZjBkYTEiLCJuYW1lIjoiQURNSU4ifV0sImlhdCI6MTcxNDk1ODMyNywiZXhwIjoxNzE0OTYxOTI3fQ.Jy9JboecgKnZo9VwWqN7IFSbTb-AKgP9_6KEAfHre3E
