@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2024-05-06T10:40:39.515Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="0ldyUy5Tkx9S1YYoDeql" version="24.3.1" type="google">
+  <diagram name="1" id="XoWyrJGA2okFahLqpIQJ">
+    <mxGraphModel dx="1434" dy="746" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#F1FAEE" math="0" shadow="1">
+      <root>
+        <mxCell id="YCeXka0qfhqYGI-nKGoZ-0" />
+        <mxCell id="YCeXka0qfhqYGI-nKGoZ-1" parent="YCeXka0qfhqYGI-nKGoZ-0" />
+        <mxCell id="YCeXka0qfhqYGI-nKGoZ-2" value="" style="shape=image;imageAspect=0;aspect=fixed;verticalLabelPosition=bottom;verticalAlign=top;rounded=1;sketch=1;strokeColor=#457B9D;fillColor=#A8DADC;fontColor=#1D3557;image=https://cursos-dev.com/assets/images/logo-horizontal.png;" parent="YCeXka0qfhqYGI-nKGoZ-1" vertex="1">
+          <mxGeometry width="282.99" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="YCeXka0qfhqYGI-nKGoZ-3" value="" style="shape=image;imageAspect=0;aspect=fixed;verticalLabelPosition=bottom;verticalAlign=top;rounded=1;sketch=1;strokeColor=#457B9D;fillColor=#A8DADC;fontColor=#1D3557;image=https://cursos-dev.com/assets/images/logo-horizontal.png;" parent="YCeXka0qfhqYGI-nKGoZ-1" vertex="1">
+          <mxGeometry width="282.99" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="xxj2mbU-K6cE7kQLX9P4-0" value="MIDDLEWARES" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="YCeXka0qfhqYGI-nKGoZ-1">
+          <mxGeometry x="220" y="210" width="270" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xxj2mbU-K6cE7kQLX9P4-1" value="GUARD" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="YCeXka0qfhqYGI-nKGoZ-1">
+          <mxGeometry x="220" y="310" width="270" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xxj2mbU-K6cE7kQLX9P4-2" value="INTERCEPTOR" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="YCeXka0qfhqYGI-nKGoZ-1">
+          <mxGeometry x="220" y="400" width="270" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xxj2mbU-K6cE7kQLX9P4-3" value="MIDDLEWARE" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="YCeXka0qfhqYGI-nKGoZ-1">
+          <mxGeometry x="220" y="490" width="270" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
